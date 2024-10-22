@@ -1,12 +1,32 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 
 interface SpeechRecognitionProps {
-  onTranscript: (text: string) => void;
+  onTranscript: (text: string, audioData: number[]) => void;
 }
 
 const SpeechRecognition: React.FC<SpeechRecognitionProps> = ({ onTranscript }) => {
   const [isListening, setIsListening] = useState(false);
   const [recognition, setRecognition] = useState<any>(null);
+  const [audioContext, setAudioContext] = useState<AudioContext | null>(null);
+  const [analyser, setAnalyser] = useState<AnalyserNode | null>(null);
+
+  const initializeAudio = useCallback(() => {
+    if (!audioContext) {
+      const newAudioContext = new (window.AudioContext || window.webkitAudioContext)();
+      setAudioContext(newAudioContext);
+
+      const newAnalyser = newAudioContext.createAnalyser();
+      newAnalyser.fftSize = 256;
+      setAnalyser(newAnalyser);
+
+      navigator.mediaDevices.getUserMedia({ audio: true })
+        .then(stream => {
+          const source = newAudioContext.createMediaStreamSource(stream);
+          source.connect(newAnalyser);
+        })
+        .catch(err => console.error('Error accessing microphone:', err));
+    }
+  }, [audioContext]);
 
   useEffect(() => {
     const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
@@ -22,15 +42,22 @@ const SpeechRecognition: React.FC<SpeechRecognitionProps> = ({ onTranscript }) =
           .map((result) => result.transcript)
           .join('');
 
-        onTranscript(transcript);
+        if (analyser) {
+          const frequencyData = new Uint8Array(analyser.frequencyBinCount);
+          analyser.getByteFrequencyData(frequencyData);
+          onTranscript(transcript, Array.from(frequencyData));
+        } else {
+          onTranscript(transcript, []);
+        }
       };
 
       setRecognition(recognition);
     }
-  }, [onTranscript]);
+  }, [onTranscript, analyser]);
 
   const startListening = () => {
     if (recognition) {
+      initializeAudio();
       recognition.start();
       setIsListening(true);
     }

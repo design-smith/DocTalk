@@ -1,51 +1,69 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.css'
 import logo from './assets/DocTalkLogo.png';
 import AutoScrollComponent from './components/AutoScrollComponent';
 import SpeechRecognition from './components/SpeechRecognition';
+import Translation from './components/Translation';
+import AudioVisualizer from './components/AudioVisualizer';
 
 interface Message {
   id: number;
-  text: string;
+  original: string;
+  translated: string;
 }
 
 function App() {
   const [messages, setMessages] = useState<Message[]>([]);
+  const [currentText, setCurrentText] = useState('');
+  const [audioData, setAudioData] = useState<number[]>([]);
+  const [debugInfo, setDebugInfo] = useState<string>('');
 
-  const addMessage = (text: string) => {
-    setMessages(prev => [...prev, { id: Date.now(), text }]);
+  useEffect(() => {
+    setDebugInfo('App mounted');
+  }, []);
+
+  const addMessage = (original: string, translated: string) => {
+    setMessages(prev => [...prev, { id: Date.now(), original, translated }]);
   };
-  const handleTranscript = (transcript: string) => {
-    addMessage(transcript);
+
+  const handleTranscript = (transcript: string, audioFrequencyData: number[]) => {
+    setCurrentText(transcript);
+    setAudioData(audioFrequencyData);
+    setDebugInfo(`Received transcript: ${transcript.slice(0, 20)}... and audio data of length ${audioFrequencyData.length}`);
   };
-  console.log(addMessage);
+
+  const handleTranslation = (translatedText: string) => {
+    addMessage(currentText, translatedText);
+    setCurrentText('');
+  };
 
   return (
     <div className='main'>
       <img src={logo} className='logo' alt="DocTalk Logo" />
       <div className='screen'>
         <div className="column one">
-        <AutoScrollComponent className="scroll-area">
+          <AutoScrollComponent className="scroll-area">
             {messages.map((message) => (
-              <div key={message.id} className="message">{message.text}</div>
+              <div key={message.id} className="message">{message.original}</div>
             ))}
           </AutoScrollComponent>
         </div>
         <div className="column two">
-        <SpeechRecognition onTranscript={handleTranscript} />
-        <div className="flex justify-between mt-8">
-      </div>
+          <AudioVisualizer audioData={audioData} />
+          <SpeechRecognition onTranscript={handleTranscript} />
+          <div style={{ color: 'white', marginTop: '10px' }}>App Debug: {debugInfo}</div>
         </div>
         <div className="column three">
           <AutoScrollComponent className="scroll-area">
-              {messages.map((message) => (
-                <div key={message.id} className="message">{message.text}</div>
-              ))}
+            {messages.map((message) => (
+              <div key={message.id} className="message">{message.translated}</div>
+            ))}
           </AutoScrollComponent>
         </div>
       </div>
+      <Translation text={currentText} onTranslated={handleTranslation} />
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
