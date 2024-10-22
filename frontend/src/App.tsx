@@ -49,9 +49,8 @@ function App() {
           </AutoScrollComponent>
         </div>
         <div className="column two">
-          <AudioVisualizer audioData={audioData} />
+          <AudioVisualizer audioData={audioData}/>
           <SpeechRecognition onTranscript={handleTranscript} />
-          <div style={{ color: 'white', marginTop: '10px' }}>App Debug: {debugInfo}</div>
         </div>
         <div className="column three">
           <AutoScrollComponent className="scroll-area">
