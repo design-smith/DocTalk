@@ -11,10 +11,12 @@
   },
   "dependencies": {
     "@types/dat.gui": "^0.7.13",
+    "@types/three": "^0.169.0",
     "dat.gui": "^0.7.9",
     "dotenv": "^16.4.5",
     "react": "^18.3.1",
-    "react-dom": "^18.3.1"
+    "react-dom": "^18.3.1",
+    "three": "^0.169.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.11.1",
