@@ -9,16 +9,8 @@
   top: 0;
   left: 0;
   right: 0;
-  height: 400px;  /* Adjust this value to control the fade height */
-  background: linear-gradient(to bottom, 
-              rgb(0, 0, 0) 0%,
-              rgba(0, 0, 0, 0.8) 40%,
-              rgba(0, 0, 0, 0.6) 60%,
-              rgba(0, 0, 0, 0.4) 80%,
-              rgba(0, 0, 0, 0.2) 90%,
-              rgba(255,255,255,0) 100%);
-  pointer-events: none;
-  z-index: 1;
+  height: 40%;  /* Adjust this value to control the fade height */
+  background: transparent
 }
 
 .scroll-content {

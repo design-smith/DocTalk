@@ -8,32 +8,56 @@
   height: 100vh;
   display: flex;
   flex-direction: column;
-  background: transparent;
+  background-image: url('assets/back.jpg');
+  background-size: auto
 }
 
 .screen {
   flex-grow: 1;
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: 45% 5% 45%;
   gap: 20px;
   overflow: hidden;
+  padding: 2%;
 }
 
 .column {
+  padding: 10%;
   display: flex;
   flex-direction: column;
   overflow: hidden;
   height: 50vh;
+  border-radius: 4%;
 }
-
+.button-section{
+  flex-grow: 1;
+  display: grid;
+  grid-template-columns: 45% 5% 45%;
+  gap: 20px;
+  overflow: hidden;
+  padding: 2%;
+  margin-bottom: 5%;
+}
+.docNotes{
+  width: 400px;
+  background-color: #0765B2;
+}
+.clear{
+  background-color: #B20707;
+}
+.language{
+  width: 400px;
+  background-color: #8207B2;
+}
 .one {
   color: #9abffc;
-  font-size: large;
+  font-size: 40px;
   font-weight: 800;
+  text-align: left;
+  background-color: #1E1E1E;
 }
 .two{
   text-align: center;
-  background-color: transparent;
 }
 
 .audio-visualizer {
@@ -47,8 +71,10 @@
 }
 .three {
   color: #FC9ACE;
-  font-size: large;
+  font-size: 40px;
   font-weight: 800;
+  text-align: right;
+  background-color: #1E1E1E;
 }
 
 .scroll-area {
@@ -74,13 +100,12 @@
 }
 
 button {
-  margin-top: 10px;
-  padding: 10px;
-  background-color: #4CAF50;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
+  align-self: center;
+ margin: 20px;
+ font-size: 3rem;
+ border-style: none;
+ padding: 10px;
+ border-radius: 16px;
 }
 
 button:hover {
