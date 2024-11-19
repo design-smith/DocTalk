@@ -5,52 +5,8 @@ import AutoScrollComponent from './components/AutoScrollComponent';
 import SpeechRecognition from './components/SpeechRecognition';
 import RealTimeTranslation from './components/RealTimeTranslation';
 import AudioVisualizer from './components/AudioVisualizer';
-import { 
-  Button, 
-  Select, 
-  MenuItem, 
-  createTheme, 
-  ThemeProvider 
-} from '@mui/material';
-import DownloadIcon from '@mui/icons-material/Download';
-import LanguageIcon from '@mui/icons-material/Language';
+import Button from '@mui/material/Button'
 
-// Create a custom theme for the buttons
-const theme = createTheme({
-  palette: {
-    download: {
-      main: '#0765B2',
-      contrastText: '#fff',
-    },
-    clear: {
-      main: '#B20707',
-      contrastText: '#fff',
-    },
-    language: {
-      main: '#8207B2',
-      contrastText: '#fff',
-    },
-  },
-  components: {
-    MuiButton: {
-      styleOverrides: {
-        root: {
-          fontSize: '1.2rem',
-          padding: '10px 20px',
-          borderRadius: '8px',
-        },
-      },
-    },
-    MuiSelect: {
-      styleOverrides: {
-        root: {
-          borderRadius: '8px',
-          color: '#fff',
-        },
-      },
-    },
-  },
-});
 
 interface Message {
   id: number;
@@ -120,45 +76,11 @@ function App() {
           </AutoScrollComponent>
         </div>
       </div>
-      <div style={{
-            display: 'flex',
-            justifyContent: 'space-between',
-            alignItems: 'center',
-            gap: '16px',
-            marginTop: 'auto',
-          }}>
-            <Button
-              variant="contained"
-              color="download"
-              startIcon={<DownloadIcon />}
-              style={{ minWidth: '200px' }}
-            >
-              Download Notes
-            </Button>
-
-            <Button
-              variant="contained"
-              color="clear"
-              onClick={handleClear}
-              style={{ minWidth: '120px' }}
-            >
-              Clear
-            </Button>
-
-            <Select
-              value={selectedLanguage}
-              onChange={(e) => setSelectedLanguage(e.target.value as string)}
-              style={{ 
-                backgroundColor: theme.palette.language.main,
-                minWidth: '200px',
-              }}
-              IconComponent={LanguageIcon}
-            >
-              <MenuItem value="Spanish">Spanish</MenuItem>
-              <MenuItem value="French">French</MenuItem>
-              <MenuItem value="German">German</MenuItem>
-            </Select>
-          </div>
+      <div className='button-section'>
+            <button className='docNotes button'>Doctor Notes</button>
+            <button className='clear button'>Clear</button>
+            <button className='language button'>Language</button>
+      </div>
       <RealTimeTranslation text={currentText} onTranslated={handleTranslation} />
     </div>
   );
