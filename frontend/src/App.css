@@ -1,15 +1,9 @@
-.logo {
-  width: 400px;
-  align-self: center
-}
-
 .main {
   text-align: center;
-  height: 100vh;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
-  background-image: url('assets/back.jpg');
-  background-size: auto
+  background: linear-gradient(180deg, #f5f9ff 0%, #e8f1ff 100%);
 }
 
 .screen {
@@ -22,92 +16,81 @@
 }
 
 .column {
-  padding: 10%;
+  padding: 2rem;
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  height: 50vh;
-  border-radius: 4%;
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
 }
-.button-section{
-  flex-grow: 1;
-  display: grid;
-  grid-template-columns: 45% 5% 45%;
-  gap: 20px;
-  overflow: hidden;
-  padding: 2%;
-  margin-bottom: 5%;
-}
-.docNotes{
-  width: 400px;
-  background-color: #0765B2;
-}
-.clear{
-  background-color: #B20707;
-}
-.language{
-  width: 400px;
-  background-color: #8207B2;
-}
-.one {
-  color: #9abffc;
-  font-size: 40px;
-  font-weight: 800;
-  text-align: left;
-  background-color: #1E1E1E;
-}
-.two{
-  text-align: center;
+.column2 {
+  background-color: transparent;
+  box-shadow: none;
 }
 
-.audio-visualizer {
-  width: 100%;
-  height: 100vh;
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: -1;  /* This puts it behind other content */
-  background: transparent;
+.button-section {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  padding: 1rem;
+  margin-bottom: 2rem;
 }
-.three {
-  color: #FC9ACE;
-  font-size: 40px;
-  font-weight: 800;
-  text-align: right;
-  background-color: #1E1E1E;
+
+.docNotes {
+  background-color: #1976d2 !important;
+  text-transform: none !important;
+  font-size: 1rem !important;
+  padding: 0.5rem 1.5rem !important;
+  border-radius: 8px !important;
+}
+
+.clear {
+  background-color: #dc3545 !important;
+  text-transform: none !important;
+  font-size: 1rem !important;
+  padding: 0.5rem 1.5rem !important;
+  border-radius: 8px !important;
+}
+
+.language {
+  background-color: #6200ee !important;
+  color: white !important;
+  text-transform: none !important;
+  font-size: 1rem !important;
+  padding: 0.5rem 1.5rem !important;
+  border-radius: 8px !important;
+  min-width: 150px !important;
 }
 
 .scroll-area {
   flex-grow: 1;
-  border-radius: 5px;
+  overflow-y: auto;
+  padding: 1rem;
 }
 
 .message {
-  margin-bottom: 10px;
-  padding: 5px;
-  border-radius: 5px;
+  margin-bottom: 1rem;
+  padding: 1rem;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  text-align: left;
+  font-size: 1.1rem;
+  color: #333;
 }
 
-.scroll-area::-webkit-scrollbar { 
+/* Hide scrollbars but keep functionality */
+.scroll-area::-webkit-scrollbar {
   width: 0;
   height: 0;
-  display: none;  /* Chrome, Safari, Opera */
+  display: none;
 }
 
-.auto-scroll-container {
-  height: 100%;
-  overflow-y: auto;
+/* Custom styles for Select dropdown */
+.MuiSelect-select {
+  color: white !important;
 }
 
-button {
-  align-self: center;
- margin: 20px;
- font-size: 3rem;
- border-style: none;
- padding: 10px;
- border-radius: 16px;
-}
-
-button:hover {
-  background-color: #45a049;
+.MuiSelect-icon {
+  color: white !important;
 }
